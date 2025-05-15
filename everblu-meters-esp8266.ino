@@ -86,7 +86,11 @@ void onScheduled()
 
 
   // At 10:00:00am UTC
-  if (ptm->tm_hour == 10 && ptm->tm_min == 0 && ptm->tm_sec == 0) {
+//  if (ptm->tm_hour == 10 && ptm->tm_min == 0 && ptm->tm_sec == 0) {
+  // Every 6 hours starting at 03:00:00 UTC  
+//  if ((ptm->tm_hour - 3) % 6 == 0 && ptm->tm_min == 0 && ptm->tm_sec == 0) {
+  // At 09:00:00 and 15:00:00 UTC
+  if ((ptm->tm_hour == 9 || ptm->tm_hour == 15) && ptm->tm_min == 0 && ptm->tm_sec == 0) {
 
     // Call back in 23 hours
     mqtt.executeDelayed(1000 * 60 * 60 * 23, onScheduled);
@@ -107,7 +111,7 @@ void onScheduled()
 
 String jsonDiscoveryDevice1(
 "{ \
-  \"name\": \"Compteur Eau Index\", \
+  \"name\": \"Water Meter Index\", \
   \"unique_id\": \"water_meter_value\",\
   \"object_id\": \"water_meter_value\",\
   \"icon\": \"mdi:water\",\
@@ -121,7 +125,7 @@ String jsonDiscoveryDevice1(
   \"device\" : {\
   \"identifiers\" : [\
   \"14071984\" ],\
-  \"name\": \"Compteur Eau\",\
+  \"name\": \"Water Meter\",\
   \"model\": \"Everblu Cyble ESP8266/ESP32\",\
   \"manufacturer\": \"Psykokwak\",\
   \"suggested_area\": \"Home\"}\
@@ -129,7 +133,7 @@ String jsonDiscoveryDevice1(
 
 String jsonDiscoveryDevice2(
 "{ \
-  \"name\": \"Compteur Eau Batterie\", \
+  \"name\": \"Water Meter Battery\", \
   \"unique_id\": \"water_meter_battery\",\
   \"object_id\": \"water_meter_battery\",\
   \"device_class\": \"battery\",\
@@ -142,7 +146,7 @@ String jsonDiscoveryDevice2(
   \"device\" : {\
   \"identifiers\" : [\
   \"14071984\" ],\
-  \"name\": \"Compteur Eau\",\
+  \"name\": \"Water Meter\",\
   \"model\": \"Everblu Cyble ESP8266/ESP32\",\
   \"manufacturer\": \"Psykokwak\",\
   \"suggested_area\": \"Home\"}\
@@ -150,7 +154,7 @@ String jsonDiscoveryDevice2(
 
 String jsonDiscoveryDevice3(
 "{ \
-  \"name\": \"Compteur Eau Compteur\", \
+  \"name\": \"Water Meter Counter\", \
   \"unique_id\": \"water_meter_counter\",\
   \"object_id\": \"water_meter_counter\",\
   \"icon\": \"mdi:counter\",\
@@ -160,7 +164,7 @@ String jsonDiscoveryDevice3(
   \"device\" : {\
   \"identifiers\" : [\
   \"14071984\" ],\
-  \"name\": \"Compteur Eau\",\
+  \"name\": \"Water Meter\",\
   \"model\": \"Everblu Cyble ESP8266/ESP32\",\
   \"manufacturer\": \"Psykokwak\",\
   \"suggested_area\": \"Home\"}\
@@ -168,7 +172,7 @@ String jsonDiscoveryDevice3(
 
 String jsonDiscoveryDevice4(
   "{ \
-  \"name\": \"Compteur Eau Timestamp\", \
+  \"name\": \"Water Meter Timestamp\", \
   \"unique_id\": \"water_meter_timestamp\",\
   \"object_id\": \"water_meter_timestamp\",\
   \"device_class\": \"timestamp\",\
@@ -179,7 +183,7 @@ String jsonDiscoveryDevice4(
   \"device\" : {\
   \"identifiers\" : [\
   \"14071984\" ],\
-  \"name\": \"Compteur Eau\",\
+  \"name\": \"Water Meter\",\
   \"model\": \"Everblu Cyble ESP8266/ESP32\",\
   \"manufacturer\": \"Psykokwak\",\
   \"suggested_area\": \"Home\"}\
@@ -292,8 +296,6 @@ void setup()
     }
   }
   */
-
-
 
   cc1101_init(FREQUENCY);
 
